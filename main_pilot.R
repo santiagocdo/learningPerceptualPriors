@@ -3,6 +3,7 @@ rm(list=ls(all=TRUE))
 
 # read pilot data
 dat <- read.csv("data/paranoiachasing-bytrial(plt1-09-11-2025).csv")
+dat <- read.csv("data/paranoiachasing-bytrial(plt2-09-24-2025).csv")
 
 # subject vector
 subjs <- unique(dat$prolificID )[order(unique(dat$prolificID))]
@@ -79,7 +80,9 @@ for (i in 1:nSubj) {message(i)
   
   
   # # # # Condition Volatile # # # #
-  one_subj <- tmp[tmp$blockVolatility=="stable",]
+  # one_subj <- tmp[tmp$blockVolatility=="stable",]
+  one_subj <- tmp[tmp$blockIsVolatile==1,]
+  
   
   # # Behaviour # # 
   # calculate performance of this simulation
@@ -103,7 +106,8 @@ for (i in 1:nSubj) {message(i)
   
   
   # # # # Condition Volatile # # # # 
-  one_subj <- tmp[tmp$blockVolatility=="volatile",]
+  # one_subj <- tmp[tmp$blockVolatility=="volatile",]
+  one_subj <- tmp[tmp$blockIsVolatile==0,]
   
   # # Behaviour # # 
   # calculate performance of this simulation
@@ -160,7 +164,8 @@ colnames(wide_format)[25] <- "hit_rate"
 
 
 # print wide format csv
-write.csv(wide_format, "wide_format.csv", row.names = F)
+# write.csv(wide_format, "wide_format_p2.csv", row.names = F)
+wide_format <- read.csv("wide_format_p2.csv")
 
 
 # wide_format$p_corr <- (wide_format$sdtTable.00+wide_format$sdtTable.11)/48
@@ -213,13 +218,15 @@ anova(lm(response_criterion ~ condition*se_grp, wide_format))
 anova(lm(hit_rate ~ condition*se_grp, wide_format))
 anova(lm(fa_rate ~ condition*se_grp, wide_format))
 
+ggplot(wide_format, aes(x=condition,y=sensitivity,col=se_grp)) + stat_summary()
 
 library(ggplot2)
-ggplot(for_plot, aes(x = condition, y = value, col=se_grp)) + 
+p2 <- ggplot(for_plot, aes(x = condition, y = value, col=se_grp)) + 
   stat_summary(position = position_dodge(.5)) +
   # stat_compare_means(method = "t.test", label = "p.signif") + 
   facet_wrap(variable ~ ., scales = "free_y")
 
+ggpubr::ggarrange(p1,p2)
 
 
 
