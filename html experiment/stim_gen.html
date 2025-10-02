@@ -1,76 +1,46 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>Chasing Dots Recording</title>
-  <script src="jspsych.js"></script>
-  <script src="plugins/jspsych-html-keyboard-response.js"></script>
-  <link rel="stylesheet" href="jspsych.css">
-</head>
-<body></body>
+    <head>
+        <script src="jspsych-6.0.5/jspsych-customized.js"></script>
+        <script src="jspsych-6.0.5/plugins/jspsych-html-button-response-customized.js"></script>
+        <script src="jspsych-6.0.5/plugins/jspsych-image-button-response-customized.js"></script>
+        <script src="jspsych-6.0.5/plugins/jspsych-survey-multi-select-customized.js"></script>
 
-<script>
 
-// === Recorder helper ===
-function recordCanvas(canvas, duration, filename) {
-  return new Promise((resolve) => {
-    let stream = canvas.captureStream(60); // 60 fps recording
-    let recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
-    let chunks = [];
+        <script src="jspsych-6.0.5/plugins/jspsych-html-keyboard-response.js"></script>
+        <script src="jspsych-6.0.5/plugins/jspsych-call-function.js"></script>
+        <script src="jspsych-6.0.5/plugins/jspsych-survey-text.js"></script>
+        <script src="jspsych-6.0.5/plugins/jspsych-survey-number.js"></script>
+        <script src="jspsych-6.0.5/plugins/jspsych-survey-likert-customized.js"></script>
+        <script src="jspsych-6.0.5/plugins/jspsych-instructions.js"></script>
+        <script src="jspsych-6.0.5/plugins/jspsych-psychophysics.js"></script>  
+        <script src="jspsych-6.0.5/plugins/jspsych-survey-multi-choice.js"></script>
+        <script src="jspsych-6.0.5/plugins/jspsych-html-slider-response.js"></script>  
+        <script src="js/debrief_n_attention_new.js"></script>  
 
-    recorder.ondataavailable = (e) => chunks.push(e.data);
-    recorder.onstop = () => {
-      let blob = new Blob(chunks, { type: "video/webm" });
-      let url = URL.createObjectURL(blob);
+        <link rel="stylesheet" href="jspsych-6.0.5/css/jspsych.css"></link>
+        <script src="js/io.js"></script>  
 
-      // Trigger download
-      let a = document.createElement("a");
-      a.href = url;
-      a.download = filename + ".webm";
-      a.click();
+    </head>
+    <style>
+        #canvas {
+            z-index: 1; 
+            position:absolute; 
+            left:50%; 
+            top:50%;
+            /* margin-left:-250px;
+            margin-top:-250px; */
+            border: 2px solid black;
+        }
 
-      resolve();
-    };
+        .jspsych-btn {
+            width: 1000px;
+            white-space: normal;
+         }
 
-    recorder.start();
+    </style>
+    <body>
+        <script src="js/stim_gen.js"></script>  
 
-    // Stop after duration ms
-    setTimeout(() => {
-      recorder.stop();
-    }, duration);
-  });
-}
-
-// === Trial ===
-var trialCounter = 0;
-
-var test_trial = {
-  type: 'html-keyboard-response',
-  stimulus: '<canvas id="canvas"></canvas>',
-  choices: jsPsych.NO_KEYS,
-  on_load: function() {
-    trialCounter++;
-
-    // put your display(0) function call here
-    display();
-
-    // Start recording canvas
-    let canvas = document.getElementById('canvas');
-    let trialDuration = 5000; // ms (make sure this matches trial_length)
-    recordCanvas(canvas, trialDuration, "trial_" + trialCounter);
-  },
-  on_finish: function() {
-    console.log("Finished trial " + trialCounter);
-  }
-};
-
-// === Run 100 repetitions ===
-var procedure = {
-  timeline: [test_trial],
-  repetitions: 100
-};
-
-jsPsych.run([procedure]);
-
-</script>
+    </body>   
 </html>
