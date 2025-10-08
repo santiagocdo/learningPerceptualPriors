@@ -1,0 +1,9 @@
+{
+  "name": "chasing_videos",
+  "type": "module",
+  "dependencies": {
+    "canvas": "^3.2.0",
+    "child_process": "latest",
+    "json2csv": "^6.0.0-alpha.2"
+  }
+}
