@@ -1,9 +1,9 @@
 // Chasing perception and paranoia
-// By Dawei Bai 9/2025	
+// By Krisztina Jedlovszky 10/25 based on code by Dawei Bai
 
-// pilot 2: environment switch after longer time: 24 trials (instead of 12 in pilot 1)
+// pilot 3: Using pre-made videos and having the option to run a 2AFC task
 
-var skip_welcome 		= true;
+var skip_welcome 		= false;
 var skip_instructions 	= false;
 var debug_mode			= false;
 var two_afc             = true;
@@ -596,19 +596,19 @@ test_videos.forEach(videoStim => {
     timeline.push(fixation_cross, makeVideoTrial(videoStim));
 });
 
-//timeline.push(debrief_difficulty_end);				
+timeline.push(debrief_difficulty_end);				
 
-//timeline.push(notice_difference);						
-//timeline.push(notice_volatility);						
+timeline.push(notice_difference);						
+timeline.push(notice_volatility);						
 
-//timeline.push(smoothDisplay);									
+timeline.push(smoothDisplay);									
 
-//timeline = timeline.concat(timeline_survey)
+timeline = timeline.concat(timeline_survey)
 
-//timeline.push(focusQuestion);									
-//timeline.push(question1);									
-//timeline.push(question2);									
-//timeline.push(question3);		
+timeline.push(focusQuestion);									
+timeline.push(question1);									
+timeline.push(question2);									
+timeline.push(question3);		
 
 
 /* save some final subject-level data */
@@ -643,7 +643,7 @@ timeline.push({												// end recording data
 	func: saveDataWrap,
 });
 
-//timeline.push(debrief_block);									
+timeline.push(debrief_block);									
 
 
 jsPsych.init({      
