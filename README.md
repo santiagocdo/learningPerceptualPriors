@@ -1,5 +1,6 @@
 # learningPerceptualPriors
-How to run the offline stimulus generator in Windows The stimulus generator code runs offline and headlessly in Node.js. For that, the dependencies need to be installed (node, canvas, ffmpeg) and the script can be ran from the Command Prompt (not the Terminal)
+How to run the offline stimulus generator in Windows 
+The stimulus generator code runs offline and headlessly in Node.js. For that, the dependencies need to be installed (node, canvas, ffmpeg) and the script can be ran from the Command Prompt (not the Terminal)
 
 1. Download node.js from https://nodejs.org/en
 2. Add node.js to PATH by pressing Windows + R, then type: sysdm.cpl
@@ -12,3 +13,9 @@ How to run the offline stimulus generator in Windows The stimulus generator code
 9. Type npm install canvas, then npm install json2csv to install dependencies
 10. Download ffmpeg from the release builds https://www.gyan.dev/ffmpeg/builds/ and add the \bin folder to the PATH (like in step 2-6)
 11. run the code from the Command Prompt with node generate.js
+
+# Pilot 3 code
+html experiment/index-videopilot.html runs the new version of the experiment
+The accompanying files are in data/, images/ and main-videopilot.js
+You can set the experiment to 2AFC or detection task in the main-videopilot.js file
+All data is saved on the server and can be saved offline if debug_mode is turned on
