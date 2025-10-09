@@ -1,4 +1,6 @@
 # learningPerceptualPriors
+The offline stimulus generator and the videos are in the offline_stim_gen folder
+
 How to run the offline stimulus generator in Windows 
 The stimulus generator code runs offline and headlessly in Node.js. For that, the dependencies need to be installed (node, canvas, ffmpeg) and the script can be ran from the Command Prompt (not the Terminal)
 
@@ -16,6 +18,9 @@ The stimulus generator code runs offline and headlessly in Node.js. For that, th
 
 # Pilot 3 code
 html experiment/index-videopilot.html runs the new version of the experiment
-The accompanying files are in data/, images/ and main-videopilot.js
+
+The accompanying files are in the html experiment folder under data/, images/ and main-videopilot.js
+
 You can set the experiment to 2AFC or detection task in the main-videopilot.js file
+
 All data is saved on the server and can be saved offline if debug_mode is turned on
